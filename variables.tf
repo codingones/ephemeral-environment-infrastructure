@@ -1,3 +1,10 @@
+variable "tf_api_token" {
+  sensitive   = true
+  type        = string
+  nullable    = false
+  description = "The Terraform API token used to read workspace through Terraform Cloud API"
+}
+
 variable "aws_access_key_id" {
   sensitive   = true
   type        = string
