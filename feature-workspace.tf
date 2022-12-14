@@ -2,7 +2,6 @@ data "http" "feature_workspace" {
   url = "https://app.terraform.io/api/v2/organizations/${var.product}/workspaces/${var.service}-feature-${local.workspace_name}"
   request_headers = {
     Authorization = "Bearer ${var.tf_api_token}"
-    Content-Type  = "application/vnd.api+json"
   }
 }
 
