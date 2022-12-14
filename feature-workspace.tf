@@ -3,7 +3,13 @@ locals {
   workspace_name = split("/", var.branch)[1]
 }
 
+data "tfe_workspace" "ephemeral_environment" {
+  name         = "${var.service}-feature-${local.workspace_name}"
+  organization = var.product
+}
+
 resource "tfe_workspace" "ephemeral_environment" {
+  count        = "$(data.tfe_workspace.ephemeral_environment.count == 0 ? 1 : 0)"
   name         = "${var.service}-feature-${local.workspace_name}"
   organization = var.product
   description  = "Ephemeral environment for ${var.product} ${var.service} synchronized with `${var.branch}` branch"
